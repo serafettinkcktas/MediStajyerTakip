@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Sisteme Giriş - Staj Takip</title>
+    <!-- Tabler CSS CDN üzerinden çektik -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/core@@1.0.0-beta17/dist/css/tabler.min.css">
+</head>
+<body class="d-flex flex-column bg-light">
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+            <div class="text-center mb-4">
+                <h1 class="navbar-brand navbar-brand-autodark font-weight-bold h2 text-primary">STAJ TAKİP SİSTEMİ</h1>
+            </div>
+            <div class="card card-md shadow-sm border-0 bg-white">
+                <div class="card-body">
+                    <h2 class="h2 text-center mb-4">Hesabınıza Giriş Yapın</h2>
+                    <form id="loginForm" autocomplete="off" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label">E-Posta Adresi</label>
+                            <input type="email" class="form-control" placeholder="adiniz@@kurum.com" autocomplete="off" required id="loginEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Şifre</label>
+                            <input type="password" class="form-control" placeholder="••••••••" autocomplete="off" required id="loginPassword">
+                        </div>
+                        <div class="form-footer mt-4">
+                            <button type="button" class="btn btn-primary w-100" onclick="handleLogin()">Giriş Yap</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function handleLogin() {
+            var email = $('#loginEmail').val();
+            if(!email) {
+                alert("Lütfen e-posta adresinizi girin.");
+                return;
+            }
+            // Simülasyon olarak Admin paneline yönlendiriyoruz
+            window.location.href = '/Admin/Dashboard';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Dosya Yönetimi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xl">
+    <div class="page-header d-print-none my-3">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="page-title">Dosya ve Evrak Yönetimi</h2>
+                <div class="text-muted mt-1">Stajyerlerin yüklediği resmi belgeleri, CV'leri ve staj formlarını buradan inceleyebilirsiniz.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 bg-white">
+        <div class="table-responsive p-3">
+            <table id="filesTable" class="table table-vcenter card-table table-striped">
+                <thead>
+                    <tr>
+                        <th>Dosya Adı</th>
+                        <th>Yükleyen Stajyer</th>
+                        <th>Dosya Türü</th>
+                        <th>Yükleme Tarihi</th>
+                        <th class="w-1">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Veri tabanı bağlandığında dosyalar buraya gelecek -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#filesTable').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Turkish.json"
+                },
+                "responsive": true
+            });
+        });
+    </script>
+}

@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Görev Yönetimi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xl">
+    <!-- Sayfa Başlığı ve Yeni Ekle Butonu -->
+    <div class="page-header d-print-none my-3">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="page-title">Görev Yönetimi</h2>
+                <div class="text-muted mt-1">Stajyerlerin görev süreçlerini, önceliklerini ve mentör değerlendirmelerini buradan takip edebilirsiniz.</div>
+            </div>
+            <div class="col-auto ms-auto">
+                <button type="button" class="btn btn-primary" onclick="openCreateTaskModal()">
+                    Yeni Görev Oluştur
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOŞ DURUM (EMPTY STATE) TASARIMI (1. RESİMDEKİ GİBİ) -->
+    <div class="card card-md text-center py-5 my-4 shadow-sm border-0 bg-white">
+        <div class="card-body">
+            <div class="mb-3 text-muted">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-list text-secondary" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                    <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path>
+                    <path d="M9 12l.01 0"></path>
+                    <path d="M13 12l2 0"></path>
+                    <path d="M9 16l.01 0"></path>
+                    <path d="M13 16l2 0"></path>
+                </svg>
+            </div>
+            <h3 class="text-secondary mb-2">Aktif Görev Bulunmamaktadır</h3>
+            <p class="text-muted max-w-md mx-auto">
+                Sistemde şu an aktif olarak yürütülen bir süreç veya stajyer görevi bulunmuyor. <br>
+                Sağ üstteki buton aracılığıyla stajyerlerinize ilk teknik görevi atayabilirsiniz.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- GİZLİ PENCERE KATMANLARI (MODAL YAPISI) -->
+<div class="modal modal-blur fade" id="createTaskModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni Görev Atama</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createTaskForm">
+                    <div class="mb-3">
+                        <label class="form-label required">Görev Başlığı</label>
+                        <input type="text" class="form-control" placeholder="Örn: SQL Veri Tabanı Şeması" required id="taskTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required">Açıklama</label>
+                        <textarea class="form-control" rows="3" placeholder="Görev gereksinimlerini ve detaylarını buraya yazın..." required id="taskDesc"></textarea>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label class="form-label required">Atanacak Stajyer</label>
+                            <select class="form-select" required id="assignedIntern">
+                                <option value="" disabled selected>Stajyer Seçiniz...</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label required">Öncelik</label>
+                            <select class="form-select" required id="taskPriority">
+                                <option value="Yüksek Öncelik">Yüksek</option>
+                                <option value="Orta Öncelik" selected>Orta</option>
+                                <option value="Düşük Öncelik">Düşük</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label class="form-label required">Teslim Tarihi</label>
+                            <input type="date" class="form-control" required id="dueDate">
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label">Göreve Dosya Ekle</label>
+                            <input type="file" class="form-control" id="taskFile">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-primary" onclick="submitNewTask()">Görevi Atayıp Başlat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function openCreateTaskModal() {
+            // Butona basıldığında modalı ekrana getirir
+            $('#createTaskModal').modal('show');
+        }
+
+        function submitNewTask() {
+            var form = document.getElementById('createTaskForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            $('#createTaskModal').modal('hide');
+            form.reset();
+            alert("Yeni görev simülasyon olarak başarıyla oluşturuldu!");
+        }
+    </script>
+}

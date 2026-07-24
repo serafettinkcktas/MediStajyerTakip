@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Mentor Yönetimi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xl">
+    <!-- Sayfa Başlığı ve Yeni Ekle Butonu -->
+    <div class="page-header d-print-none my-3">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="page-title">Mentor Yönetimi</h2>
+                <div class="text-muted mt-1">Sistemdeki aktif mentorları listeleyebilir, yeni mentor tanımlayabilir ve stajyer ataması yapabilirsiniz.</div>
+            </div>
+            <div class="col-auto ms-auto">
+                <button type="button" class="btn btn-primary" onclick="openCreateMentorModal()">
+                    Yeni Mentor Ekle
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabler.io Kartı İçinde DataTable Tablosu -->
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="mentorsTable" class="table table-vcenter card-table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Ad Soyad</th>
+                            <th>İletişim (E-Posta)</th>
+                            <th>Sorumlu Olduğu Stajyer Sayısı</th>
+                            <th>Durum</th>
+                            <th class="w-1">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Veri tabanı bağlandığında döngü buraya gelecek, şimdilik tamamen boş -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 1: MENTOR EKLEME MODALI -->
+<div class="modal modal-blur fade" id="addMentorModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni Mentor Kaydı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addMentorForm">
+                    <div class="mb-3">
+                        <label class="form-label required">Ad Soyad</label>
+                        <input type="text" class="form-control" placeholder="Örn: Veli Hoca" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required">E-Posta</label>
+                        <input type="email" class="form-control" placeholder="Örn: veli@kurum.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required">Şifre</label>
+                        <input type="password" class="form-control" placeholder="Mentor giriş şifresi" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-primary" onclick="submitNewMentor()">Kaydet ve Listeye Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL 2: STAJYER ATAMA MODALI -->
+<div class="modal modal-blur fade" id="assignInternModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><span id="targetMentorName"></span> İsimli Mentora Stajyer Ata</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <form id="assignInternForm">
+                    <div class="mb-3">
+                        <label class="form-label required">Eşleştirilecek Stajyer</label>
+                        <select class="form-select" required>
+                            <option value="">Seçiniz...</option>
+                            
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-primary" onclick="submitAssignIntern()">Atamayı Tamamla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Tabler.io uyumlu DataTable kurulumu
+            $('#mentorsTable').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
+                },
+                "responsive": true
+            });
+        });
+
+        // 1. Mentor Ekleme Modalı Açma
+        function openCreateMentorModal() {
+            $('#addMentorModal').modal('show');
+        }
+
+        // 2. Mentor Ekleme Simülasyonu
+        function submitNewMentor() {
+            var form = document.getElementById('addMentorForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            var fullName = $('#addMentorForm input[type="text"]').val();
+            var email = $('#addMentorForm input[type="email"]').val();
+            var tempId = Math.floor(Math.random() * 1000) + 3;
+
+            var table = $('#mentorsTable').DataTable();
+            var newRowNode = table.row.add([
+                `<div class="font-weight-medium">${fullName}</div>`,
+                `<span class="text-muted">${email}</span>`,
+                `<td><span class="badge bg-purple text-purple-fg">0 Stajyer</span></td>`,
+                `<td><span class="badge bg-success text-success-fg">Aktif</span></td>`,
+                `<td>
+                    <div class="btn-list flex-nowrap">
+                        <button class="btn btn-sm btn-white" onclick="openAssignInternModal('${fullName}')">Stajyer Ata</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteMentor(${tempId}, '${fullName}')">Sil</button>
+                    </div>
+                 </td>`
+            ]).draw().node();
+
+            $(newRowNode).attr('id', 'mentor-row-' + tempId);
+
+            $('#addMentorModal').modal('hide');
+            form.reset();
+            alert("Mentor başarıyla sisteme eklendi!");
+        }
+
+        // 3. Stajyer Atama Modalı Açma
+        function openAssignInternModal(mentorName) {
+            $('#targetMentorName').text(mentorName);
+            $('#assignInternModal').modal('show');
+        }
+
+        // 4. Stajyer Atama Simülasyonu
+        function submitAssignIntern() {
+            var form = document.getElementById('assignInternForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            $('#assignInternModal').modal('hide');
+            form.reset();
+            alert("Stajyer ataması başarıyla simüle edildi!");
+        }
+
+        // 5. Silme Simülasyonu
+        function deleteMentor(id, name) {
+            if (confirm(name + " isimli mentoru silmek istediğinize emin misiniz?")) {
+                var table = $('#mentorsTable').DataTable();
+                table.row('#mentor-row-' + id).remove().draw();
+            }
+        }
+    </script>
+}

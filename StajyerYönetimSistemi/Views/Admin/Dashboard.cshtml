@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Giriş Paneli";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xl">
+    <div class="page-header d-print-none my-3">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="page-title">Genel Durum Paneli</h2>
+                <div class="text-muted mt-1">Sistemdeki stajyerlerin, görevlerin ve genel operasyonun anlık özet istatistikleri.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cards mb-4">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-sm shadow-sm border-0 bg-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <span class="bg-blue text-white avatar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+                            </span>
+                        </div>
+                        <div class="col">
+                            <div class="font-weight-medium text-muted">Toplam Stajyer</div>
+                            <div class="h1 mb-0 font-weight-bold">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-sm shadow-sm border-0 bg-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <span class="bg-yellow text-white avatar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-text" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 11l6 0" /><path d="M9 15l4 0" /></svg>
+                            </span>
+                        </div>
+                        <div class="col">
+                            <div class="font-weight-medium text-muted">Aktif Görevler</div>
+                            <div class="h1 mb-0 font-weight-bold">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-sm shadow-sm border-0 bg-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <span class="bg-green text-white avatar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checkbox" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 2v-12a2 2 0 0 1 2 -2h9" /></svg>
+                            </span>
+                        </div>
+                        <div class="col">
+                            <div class="font-weight-medium text-muted">Tamamlanan</div>
+                            <div class="h1 mb-0 font-weight-bold">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-sm shadow-sm border-0 bg-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <span class="bg-indigo text-white avatar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-award" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9m-6 0a6 6 0 1 0 12 0a6 6 0 1 0 -12 0" /><path d="M12 15l3.4 5.8a1 1 0 0 0 1.708 -.993l-1.608 -7.81" /><path d="M12 15l-3.4 5.8a1 1 0 0 1 -1.708 -.993l1.608 -7.81" /></svg>
+                            </span>
+                        </div>
+                        <div class="col">
+                            <div class="font-weight-medium text-muted">Başarı Oranı</div>
+                            <div class="h1 mb-0 font-weight-bold">%0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cards">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 bg-white">
+                <div class="card-body">
+                    <h3 class="card-title">Haftalık Görev Tamamlama Grafiği</h3>
+                    <div class="p-5 text-center bg-light rounded text-muted">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-bar mb-2 text-secondary" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M9 8m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M15 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M4 20l16 0" /></svg>
+                        <p class="mb-0 small text-muted">Grafik verisi bulunamadı. Sisteme stajyer ve görev eklendiğinde performans analizi burada listelenecektir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 bg-white">
+                <div class="card-body">
+                    <h3 class="card-title">Son Sistem Aktiviteleri</h3>
+                    <div class="p-4 text-center text-muted">
+                        <p class="small mb-0">Henüz bir sistem aktivitesi gerçekleşmedi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
