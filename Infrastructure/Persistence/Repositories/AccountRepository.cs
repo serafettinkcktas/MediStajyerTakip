@@ -26,19 +26,19 @@ public class AccountRepository : BaseRepository<Account>,IAccountRepository
         return await connection.ExecuteScalarAsync<bool>(sql, new { Email = email });
     }
 
-    public async Task<bool> CreateUser(Account account, UserProfile profile, Guid roleId)
+    public async Task<bool> CreateUser(Account account, UserProfile profile, Mentor mentor)
     {
         const string insertAccountSql = @"
-        (INSERT INTO Accounts (Id, Email, PasswordHash, CreatedAt) 
-        VALUES (@Id, @Email, @PasswordHash, @CreatedAt);)";
+        (INSERT INTO Accounts (Id, Email, PasswordHash,RoleId) 
+        VALUES (@Id, @Email, @PasswordHash, @RoleId);)";
 
         const string insertProfileSql = @"(
         INSERT INTO UserProfiles (Id, AccountId, Name, Surname) 
         VALUES (@Id, @AccountId, @Name, @Surname);)";
 
-        const string insertUserRoleSql = @"
-        (INSERT INTO UserRoles (AccountId, RoleId) 
-        VALUES (@AccountId, @RoleId);)";
+        const string insertMentorSql = @"
+        (INSERT INTO Mentors (Id,AccountId, ProfileId) 
+        VALUES (Id,@AccountId, @ProfileId);)";
 
         using var connection = _connectionFactory.CreateConnection();
         connection.Open(); 
@@ -49,11 +49,7 @@ public class AccountRepository : BaseRepository<Account>,IAccountRepository
         {
             await connection.ExecuteAsync(insertAccountSql, account, transaction);
             await connection.ExecuteAsync(insertProfileSql, profile, transaction);
-            await connection.ExecuteAsync(
-                insertUserRoleSql, 
-                new { AccountId = account.Id, RoleId = roleId }, 
-                transaction
-            );
+            await connection.ExecuteAsync(insertMentorSql,mentor, transaction);
 
             transaction.Commit();
             return true;
