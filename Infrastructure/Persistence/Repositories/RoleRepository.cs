@@ -1,5 +1,6 @@
 using System.Data;
 using Dapper;
+using Domain.Entity;
 using Domain.Interfaces;
 
 namespace Infrastructure.Persistence.Repositories;
@@ -18,15 +19,15 @@ public class RoleRepository(IDbConnectionFactory connectionFactory) : IRoleRepos
         return id; 
     }
 
-    public async Task<Guid> GetRoleByNameAsync(string roleName)
+    public async Task<Role?> GetRoleByNameAsync(string roleName)
     {
         const string sql = @"
-        SELECT Id 
+        (SELECT Id 
         FROM Roles 
-        WHERE LOWER(Name) = LOWER(@RoleName)";
+        WHERE LOWER(Name) = LOWER(@RoleName))";
 
         using var connection = _connectionFactory.CreateConnection();
         
-        return await connection.ExecuteScalarAsync<Guid>(sql, new { RoleName = roleName });
+        return await connection.ExecuteScalarAsync<Role?>(sql, new { RoleName = roleName });
     }
 }
