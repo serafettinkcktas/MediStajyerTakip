@@ -15,7 +15,18 @@ public class RoleRepository(IDbConnectionFactory connectionFactory) : IRoleRepos
 
         using var connection = _connectionFactory.CreateConnection();
         await connection.ExecuteAsync(sql, new { Id = id, RoleName = roleName });
-
         return id; 
+    }
+
+    public async Task<Guid> GetRoleByNameAsync(string roleName)
+    {
+        const string sql = @"
+        SELECT Id 
+        FROM Roles 
+        WHERE LOWER(Name) = LOWER(@RoleName)";
+
+        using var connection = _connectionFactory.CreateConnection();
+        
+        return await connection.ExecuteScalarAsync<Guid>(sql, new { RoleName = roleName });
     }
 }

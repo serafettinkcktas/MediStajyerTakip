@@ -18,9 +18,10 @@ public class AdminController(CreateRoleUseCase createRoleUseCase, AddMentorUseCa
 
    
     [HttpPost]
-    public async Task<IActionResult> AddRole()
+    public async Task<IActionResult> CreateRole(string roleName)
     {
-        return Ok();
+        var result = await _createRoleUseCase.CreateRole(roleName);
+        return Ok(result);
     }
     
     [HttpGet]
@@ -33,7 +34,7 @@ public class AdminController(CreateRoleUseCase createRoleUseCase, AddMentorUseCa
     [HttpPost]
     public async Task<IActionResult> AddMentor([FromBody]NewMentorDto newMentor)
     {
-        var result = await _addMentorUseCase.AddMentor(newMentor.Name_Surname, newMentor.Email);
+        var result = await _addMentorUseCase.AddMentorAsync(newMentor.Name_Surname, null, newMentor.Email);
         return Ok(result);
     }
 

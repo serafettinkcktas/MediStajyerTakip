@@ -6,6 +6,6 @@ public class Account
     public string Email { get; set; } = null!;
     public string Password { get; set; } = null!; // hash olarak tutulur 
     public Guid RoleId { get; set; } // stajyer , admin , mentor 
-    public bool IsDeleted { get; set; } = true;
+    public bool IsDeleted { get; set; } = false;
 }
 // accounts
