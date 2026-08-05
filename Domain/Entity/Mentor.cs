@@ -7,11 +7,15 @@ public class Mentor
         Id = id;
         AccountId = accountId;
         ProfileId = profileId;
+        IsDeleted = false;
+        InternCount = 0;
     }
 
     public Guid Id { get; set; }
     public Guid AccountId { get; set; }
     public Guid ProfileId { get; set; }
+    public int InternCount { get; set; } = 0;
+    public bool IsDeleted { get; set; } =  false;
 }
 
 
