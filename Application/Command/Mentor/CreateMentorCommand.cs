@@ -1,4 +1,4 @@
-namespace Application.DTOs.Mentor;
+namespace Application.Command.Mentor;
 
 public class CreateMentorCommand
 {

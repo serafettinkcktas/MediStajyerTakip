@@ -1,4 +1,4 @@
-using Application.DTOs.Mentor;
+using Application.Command.Mentor;
 using Application.UseCases.Admin;
 using FluentValidation;
 

@@ -16,4 +16,8 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.13" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Command\" />
+    </ItemGroup>
+
 </Project>
