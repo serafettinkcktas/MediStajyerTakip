@@ -28,3 +28,12 @@ ulasabilirsin.
 nuget paketlerinden bulamazsan terminalden yukleyebilirsin
 
 `dotnet add package Scalar.AspNetCore`
+
+### FluentValidation
+fluent validation apiye gelen isteklerin istedigimiz formata uygun olup olmadigini kontrol etmemizi saglayan
+donus turlerini kendisi ayarlayarak bizim icin kolaylik saglayan bir pakettir.
+
+### BCRYPT 
+bcrypt sifrelerin veritabanina kaydedilirken hashlenmesini saglayan ve kullanici giris yapmak istediginde de 
+kaydedilen hash ile kullanicin giris yaparken kullandigi sifrenin hash ini karsilastirarak giris yapip 
+yapmamasina izin vermemizi saglayan bir pakettir. 
