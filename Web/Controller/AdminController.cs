@@ -1,4 +1,5 @@
 using Application.DTOs;
+using Application.DTOs.Mentor;
 using Application.UseCases.Admin;
 using Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,10 +33,12 @@ public class AdminController(CreateRoleUseCase createRoleUseCase, AddMentorUseCa
 
    
     [HttpPost]
-    public async Task<IActionResult> AddMentor([FromBody]NewMentorDto newMentor)
+    public async Task<IActionResult> AddMentor([FromBody]CreateMentorCommand command)
     {
-        var result = await _addMentorUseCase.AddMentorAsync(newMentor.Name_Surname, null, newMentor.Email);
-        return Ok(result);
+        var result = await _addMentorUseCase.AddMentorAsync(command);
+        if (result.IsSuccess)
+            return Ok(result);
+        return BadRequest(result);
     }
 
 }
